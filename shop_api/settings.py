@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-rkb@2*ktz7*4_24_9mz(h&r&+w%__^1r9&jt=oiet#%*&2#@2#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
 
 
 # Application definition
@@ -39,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'product',
-    'rest_framework'
+    'rest_framework',
+    'debug_toolbar',
+
 ]
 
 MIDDLEWARE = [
@@ -50,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'shop_api.urls'

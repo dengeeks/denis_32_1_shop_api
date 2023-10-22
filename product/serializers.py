@@ -5,10 +5,12 @@ from product.models import Category, Review, Product
 class Categories_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('name',)
+        fields = ('name','product_counts')
 
 
 class Product_Serializer(serializers.ModelSerializer):
+    category = Categories_Serializer()
+
     class Meta:
         model = Product
         fields = ['title', 'description', 'price', 'category']
@@ -17,4 +19,13 @@ class Product_Serializer(serializers.ModelSerializer):
 class Review_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ['text', 'product']
+        fields = ('product','text','stars')
+
+
+class ProductReviews_Serializer(serializers.ModelSerializer):
+    product_review = Review_Serializer(many=True)
+    category = Categories_Serializer()
+
+    class Meta:
+        model = Product
+        fields = ['title', 'description', 'price', 'category','product_review', 'average_rating']

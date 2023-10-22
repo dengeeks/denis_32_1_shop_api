@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from product.models import Category, Product, Review
 from rest_framework.decorators import api_view
-from product.serializers import Categories_Serializer, Product_Serializer, Review_Serializer
+from product.serializers import Categories_Serializer, Product_Serializer, Review_Serializer,ProductReviews_Serializer
 from rest_framework import status
 
 
@@ -26,7 +26,7 @@ def CategoryDetail_ApiView(request, id):
 
 @api_view(['GET'])
 def ListProducts_ApiView(request):
-    products = Product.objects.all()
+    products = Product.objects.select_related('category').all()
     json = Product_Serializer(products, many=True).data
     return Response(data=json)
 
@@ -55,4 +55,10 @@ def Review_ApiView(request, id):
     except Review.DoesNotExist:
         return Response(data={'message:' 'Комментарий не найден!'}, status=status.HTTP_404_NOT_FOUND)
     json = Review_Serializer(review, many=False).data
+    return Response(data=json)
+
+@api_view(['GET'])
+def ProductReviewsList_ApiView(request):
+    products_reviews = Product.objects.select_related('category').prefetch_related('product_review').all()
+    json = ProductReviews_Serializer(products_reviews, many=True).data
     return Response(data=json)

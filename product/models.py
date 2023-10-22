@@ -10,6 +10,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    @property
     def product_counts(self):
         return self.product_category.count()
 
@@ -23,8 +24,13 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    @property
     def average_rating(self):
-        return sum([i.stars for i in self.product_review.all()]) / self.product_review.count()
+        if len(self.product_review.all()) > 0 :
+            return sum([i.stars for i in self.product_review.all()]) / self.product_review.count()
+        else:
+            return 0
+
 
 
 class Review(models.Model):
@@ -37,7 +43,7 @@ class Review(models.Model):
     )
     text = models.TextField()
     product = models.ForeignKey(to='Product', on_delete=models.CASCADE, related_name='product_review')
-    stars = models.IntegerField(choices=STARS,default=5)
+    stars = models.IntegerField(choices=STARS, default=5)
 
     def __str__(self):
         return self.text

@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/v1/products/<int:id>/', views.ProductDetail_ApiView),
     path('api/v1/reviews/', views.ListReviews_ApiView),
     path('api/v1/reviews/<int:id>/', views.Review_ApiView),
+    path('api/v1/tags/',views.ListTagsView),
 ]

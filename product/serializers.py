@@ -84,7 +84,7 @@ class ProductValidateSerializer(serializers.Serializer):
 class Review_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('product', 'text', 'stars')
+        fields = ('product_id', 'text', 'stars')
 
 
 class ReviewValidatedSerializer(serializers.Serializer):

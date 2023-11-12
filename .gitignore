@@ -1,0 +1,11 @@
+.env
+.idea
+db.sqlite3
+manage.py
+__pycache__/
+accounts/__init__.py
+accounts/__pycache__/
+accounts/migrations/
+product/__pycache__/
+product/migrations/
+shop_api/__pycache__/

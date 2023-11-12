@@ -106,7 +106,7 @@ class ListProductsCreateView(generics.ListCreateAPIView):
 
 
 # @api_view(['GET', 'POST'])
-# def ListProducts_ApiView(request):
+# def ListProductsCreateApiView(request):
 #     if request.method == 'GET':
 #         products = Product.objects.select_related('category').all()
 #         json = Product_Serializer(products, many=True).data
